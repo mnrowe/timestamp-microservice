@@ -4,11 +4,13 @@ var router = express.Router()
 // htpp://localhost:3000/december?year=2015
 router.get('/', function(req, res, next) {
   var year = req.query.year;
+  var timestamp = req.query.timestamp;
 
   if(year){
-    if(year.match(/^[12][0-9]{3}/i)) {
+    if(year.match(/^[12][0-9]{3}/i) || timestamp.match(/1234/i)) {
       res.json({
-        year: year
+        year: year,
+        timestamp: timestamp
       })
     }
   }
