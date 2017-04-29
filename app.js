@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/', months);
+app.use(/\/Jan(uary)?|\/Feb(uary)?|\/Mar(ch)?|\/Apr(il)|\/May|\/(Jun)e|\/Jul(y)\/Aug(ust)|\/Sep(tember)|\/Oct(ober)|\/Nov(ember)|\/Dec(ember)/i, months);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
