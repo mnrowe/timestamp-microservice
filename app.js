@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var dateRe =
+/\/Jan(uary)?|\/Feb(uary)?|\/Mar(ch)?|\/Apr(il)?|\/May|\/(Jun)e?|\/Jul(y)?\/Aug(ust)?|\/Sep(tember)?|\/Oct(ober)?|\/Nov(ember)?|\/Dec(ember)?/i;
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -25,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use(/\/Jan(uary)?|\/Feb(uary)?|\/Mar(ch)?|\/Apr(il)?|\/May|\/(Jun)e?|\/Jul(y)?\/Aug(ust)?|\/Sep(tember)?|\/Oct(ober)?|\/Nov(ember)?|\/Dec(ember)?/i, months);
+app.use(dateRe, months);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
