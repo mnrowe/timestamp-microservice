@@ -8,7 +8,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "prettier --write" ,
+      "prettier --write",
       "git add"
     ]
   },
@@ -22,6 +22,12 @@
     "serve-favicon": "~2.4.2"
   },
   "devDependencies": {
+    "husky": "^0.13.3",
+    "lint-staged": "^3.4.1",
     "nodemon": "^1.11.0"
-  }
+  },
+  "main": "bin/www",
+  "repository": "git@github.com:mnrowe/timestamp-microservice.git",
+  "author": "Matthew Rowe <mrowe.w@gmail.com>",
+  "license": "MIT"
 }
