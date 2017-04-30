@@ -48,7 +48,7 @@ router.get('/', function(req, res, next) {
       res.send(404)
     }
 
-    else if (timestamp.match(/1234/i)) {
+    else if (timestamp.match(/1493508095/i)) {
       res.json({
         timestamp: timestamp
       })
