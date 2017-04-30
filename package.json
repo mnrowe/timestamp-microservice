@@ -3,7 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write" ,
+      "git add"
+    ]
   },
   "dependencies": {
     "body-parser": "~1.17.1",
