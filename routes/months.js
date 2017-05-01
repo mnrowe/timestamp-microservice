@@ -3,6 +3,7 @@ var router = express.Router();
 
 // htpp://localhost:3000/december?year=2015
 router.get("/", function(req, res, next) {
+  const month = req.baseUrl.match(/[a-z]/gi).join("");
   const year = req.query.year;
   const timestamp = req.query.timestamp;
   const yearRe = /^[12][0-9]{3}/i;
@@ -16,7 +17,7 @@ router.get("/", function(req, res, next) {
       res.send(404);
     } else if (year.match(yearRe) && timestamp.match(timestampRe)) {
       res.json({
-        year: year,
+        date: `${month} ${year}`,
         timestamp: timestamp
       });
     } else {
@@ -30,7 +31,7 @@ router.get("/", function(req, res, next) {
     } else if (year.match(yearRe)) {
       let yearConverted = y => parseInt(y) + 1;
       res.json({
-        year: year,
+        date: `${month}${year}`,
         timestamp: yearConverted(year)
       });
     } else {
@@ -43,7 +44,7 @@ router.get("/", function(req, res, next) {
     } else if (timestamp.match(timestampRe)) {
       let timestampConverted = t => t;
       res.json({
-        year: timestampConverted(timestamp),
+        date: timestampConverted(timestamp),
         timestamp: timestamp
       });
     }
