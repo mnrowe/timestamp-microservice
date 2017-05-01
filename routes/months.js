@@ -45,7 +45,27 @@ router.get("/", function(req, res, next) {
     if (timestamp.length != timestampLength) {
       res.send(404);
     } else if (timestamp.match(timestampRe)) {
-      let timestampConverted = t => t;
+      let timestampConverted = t => {
+        let date = new Date(t * 1000);
+        const months = [
+          "January",
+          "Febuary",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
+        ];
+        const month = months[date.getMonth()];
+        const year = date.getFullYear();
+        const day = date.getDate();
+        return `${month} ${day} ${year}`;
+      };
       res.json({
         unix: timestamp,
         natural: timestampConverted(timestamp)
