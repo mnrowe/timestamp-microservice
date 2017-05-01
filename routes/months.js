@@ -10,6 +10,7 @@ router.get("/", function(req, res, next) {
   const yearLength = 4;
   const timestampLength = 10;
 
+  // http://localhost:3000/december?year=2016&timestamp=1493508095
   if (year && timestamp) {
     if (year.length != yearLength && timestamp.length != timestampLength) {
       res.send(404);
@@ -21,21 +22,28 @@ router.get("/", function(req, res, next) {
     } else {
       res.send(404);
     }
+
+    // http://localhost:3000/december?year=2016
   } else if (year) {
     if (year.length != yearLength) {
       res.send(404);
     } else if (year.match(yearRe)) {
+      let yearConverted = y => parseInt(y) + 1;
       res.json({
-        year: year
+        year: year,
+        timestamp: yearConverted(year)
       });
     } else {
       res.send(404);
     }
+    // http://localhost:3000/december?timestamp=1493508095
   } else if (timestamp) {
     if (timestamp.length != timestampLength) {
       res.send(404);
     } else if (timestamp.match(timestampRe)) {
+      let timestampConverted = t => t;
       res.json({
+        year: timestampConverted(timestamp),
         timestamp: timestamp
       });
     }
