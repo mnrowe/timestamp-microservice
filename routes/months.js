@@ -8,7 +8,7 @@ router.get("/", function(req, res, next) {
     req.baseUrl.match(/[a-z]/gi).join("").charAt(0).toUpperCase() +
     req.baseUrl.match(/[a-z]/gi).join("").slice(1);
   const year = req.query.year;
-  var day = req.query.day;
+  let day = req.query.day;
   const timestamp = req.query.timestamp;
   const yearRe = /^[12][0-9]{3}/i;
   const timestampRe = /[0-9]{10}/i;
