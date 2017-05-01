@@ -8,11 +8,16 @@ router.get("/", function(req, res, next) {
     req.baseUrl.match(/[a-z]/gi).join("").charAt(0).toUpperCase() +
     req.baseUrl.match(/[a-z]/gi).join("").slice(1);
   const year = req.query.year;
+  var day = req.query.day;
   const timestamp = req.query.timestamp;
   const yearRe = /^[12][0-9]{3}/i;
   const timestampRe = /[0-9]{10}/i;
   const yearLength = 4;
   const timestampLength = 10;
+
+  if (day === undefined) {
+    day = new Date().getDate();
+  }
 
   // http://localhost:3000/december?year=2016&timestamp=1493508095
   if (year && timestamp) {
@@ -21,7 +26,7 @@ router.get("/", function(req, res, next) {
     } else if (year.match(yearRe) && timestamp.match(timestampRe)) {
       res.json({
         unix: parseInt(timestamp),
-        natural: `${month} ${year}`
+        natural: `${month} ${day} ${year}`
       });
     } else {
       res.send(404);
@@ -46,11 +51,10 @@ router.get("/", function(req, res, next) {
         "November",
         "December"
       ];
-      let date = new Date().getDate();
-      let unix = new Date(year, months.indexOf(month), parseInt(date));
+      let unix = new Date(year, months.indexOf(month), parseInt(day));
       res.json({
         unix: unix.getTime() / 1000,
-        natural: `${month} ${date} ${year}`
+        natural: `${month} ${day} ${year}`
       });
     } else {
       res.send(404);
@@ -78,11 +82,10 @@ router.get("/", function(req, res, next) {
         ];
         const month = months[date.getMonth()];
         const year = date.getFullYear();
-        const day = date.getDate();
         return `${month} ${day} ${year}`;
       };
       res.json({
-        unix: timestamp,
+        unix: parseInt(timestamp),
         natural: timestampConverted(timestamp)
       });
     }
