@@ -32,10 +32,25 @@ router.get("/", function(req, res, next) {
     if (year.length != yearLength) {
       res.send(404);
     } else if (year.match(yearRe)) {
-      let yearConverted = y => parseInt(y) + 1;
+      const months = [
+        "January",
+        "Febuary",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ];
+      let date = new Date().getDate();
+      let unix = new Date(year, months.indexOf(month), parseInt(date));
       res.json({
-        unix: yearConverted(year),
-        natural: `${month}${year}`
+        unix: unix.getTime() / 1000,
+        natural: `${month} ${date} ${year}`
       });
     } else {
       res.send(404);
