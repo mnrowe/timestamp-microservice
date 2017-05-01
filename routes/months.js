@@ -3,7 +3,10 @@ var router = express.Router();
 
 // htpp://localhost:3000/december?year=2015
 router.get("/", function(req, res, next) {
-  const month = req.baseUrl.match(/[a-z]/gi).join("");
+  // should probably refactor this..
+  const month =
+    req.baseUrl.match(/[a-z]/gi).join("").charAt(0).toUpperCase() +
+    req.baseUrl.match(/[a-z]/gi).join("").slice(1);
   const year = req.query.year;
   const timestamp = req.query.timestamp;
   const yearRe = /^[12][0-9]{3}/i;
