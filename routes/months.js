@@ -10,7 +10,7 @@ router.get("/", function(req, res, next) {
   const year = req.query.year;
   const timestamp = req.query.timestamp;
   const yearRe = /^[12][0-9]{3}/i;
-  const timestampRe = /1493508095/i;
+  const timestampRe = /[0-9]{10}/i;
   const yearLength = 4;
   const timestampLength = 10;
 
@@ -20,8 +20,8 @@ router.get("/", function(req, res, next) {
       res.send(404);
     } else if (year.match(yearRe) && timestamp.match(timestampRe)) {
       res.json({
-        date: `${month} ${year}`,
-        timestamp: timestamp
+        unix: parseInt(timestamp),
+        natural: `${month} ${year}`
       });
     } else {
       res.send(404);
@@ -34,8 +34,8 @@ router.get("/", function(req, res, next) {
     } else if (year.match(yearRe)) {
       let yearConverted = y => parseInt(y) + 1;
       res.json({
-        date: `${month}${year}`,
-        timestamp: yearConverted(year)
+        unix: yearConverted(year),
+        natural: `${month}${year}`
       });
     } else {
       res.send(404);
@@ -47,8 +47,8 @@ router.get("/", function(req, res, next) {
     } else if (timestamp.match(timestampRe)) {
       let timestampConverted = t => t;
       res.json({
-        date: timestampConverted(timestamp),
-        timestamp: timestamp
+        unix: timestamp,
+        natural: timestampConverted(timestamp)
       });
     }
   } else {
