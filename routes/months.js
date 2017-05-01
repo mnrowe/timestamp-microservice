@@ -3,8 +3,8 @@ var router = express.Router();
 
 // htpp://localhost:3000/december?year=2015
 router.get("/", function(req, res, next) {
-  var year = req.query.year;
-  var timestamp = req.query.timestamp;
+  const year = req.query.year;
+  const timestamp = req.query.timestamp;
   const yearRe = /^[12][0-9]{3}/i;
   const timestampRe = /1493508095/i;
   const yearLength = 4;
