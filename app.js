@@ -5,7 +5,7 @@ var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var monthsRe = /\/Jan(uary)?|\/Feb(uary)?|\/Mar(ch)?|\/Apr(il)?|\/May|\/(Jun)e?|\/Jul(y)?\/Aug(ust)?|\/Sep(tember)?|\/Oct(ober)?|\/Nov(ember)?|\/Dec(ember)?/i;
-var timestampRe = /\/[0-9]{10}/gi;
+var timestampRe = /\/[0-9]{10}/i;
 
 var index = require("./routes/index");
 var users = require("./routes/users");
