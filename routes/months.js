@@ -14,6 +14,20 @@ router.get("/", function(req, res, next) {
   const timestampRe = /[0-9]{10}/i;
   const yearLength = 4;
   const timestampLength = 10;
+  const months = [
+    "January",
+    "Febuary",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
 
   if (day === undefined) {
     day = new Date().getDate();
@@ -37,20 +51,6 @@ router.get("/", function(req, res, next) {
     if (year.length != yearLength) {
       res.send(404);
     } else if (year.match(yearRe)) {
-      const months = [
-        "January",
-        "Febuary",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ];
       let unix = new Date(year, months.indexOf(month), parseInt(day));
       res.json({
         unix: unix.getTime() / 1000,
@@ -66,20 +66,6 @@ router.get("/", function(req, res, next) {
     } else if (timestamp.match(timestampRe)) {
       let timestampConverted = t => {
         let date = new Date(t * 1000);
-        const months = [
-          "January",
-          "Febuary",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December"
-        ];
         const month = months[date.getMonth()];
         const year = date.getFullYear();
         return `${month} ${day} ${year}`;
