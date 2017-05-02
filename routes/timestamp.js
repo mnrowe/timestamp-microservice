@@ -4,10 +4,6 @@ var router = express.Router();
 router.get("/", function(req, res, next) {
   const timestamp = parseInt(req.baseUrl.match(/[0-9]{10}/i));
   const timestampLength = timestamp.length;
-  let day = req.query.day;
-  if (day === undefined) {
-    day = new Date().getDate();
-  }
 
   if (timestamp.length != timestampLength) {
     rese.send(404);
@@ -30,6 +26,7 @@ router.get("/", function(req, res, next) {
       ];
       const month = months[date.getMonth()];
       const year = date.getFullYear();
+      const day = date.getDay();
       return `${month} ${day} ${year}`;
     };
     res.json({
