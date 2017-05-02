@@ -29,6 +29,14 @@ router.get("/", function(req, res, next) {
     "December"
   ];
 
+  const timestampConverted = t => {
+    let date = new Date(t * 1000);
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    const day = date.getDate();
+    return `${month} ${day} ${year}`;
+  };
+
   if (day === undefined) {
     day = new Date().getDate();
   }
@@ -40,7 +48,7 @@ router.get("/", function(req, res, next) {
     } else if (year.match(yearRe) && timestamp.match(timestampRe)) {
       res.json({
         unix: parseInt(timestamp),
-        natural: `${month} ${day} ${year}`
+        natural: timestampConverted(timestamp)
       });
     } else {
       res.send(404);
@@ -64,12 +72,6 @@ router.get("/", function(req, res, next) {
     if (timestamp.length != timestampLength) {
       res.send(404);
     } else if (timestamp.match(timestampRe)) {
-      let timestampConverted = t => {
-        let date = new Date(t * 1000);
-        const month = months[date.getMonth()];
-        const year = date.getFullYear();
-        return `${month} ${day} ${year}`;
-      };
       res.json({
         unix: parseInt(timestamp),
         natural: timestampConverted(timestamp)
