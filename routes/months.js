@@ -9,7 +9,7 @@ router.get("/", function(req, res, next) {
     req.baseUrl.match(/[a-z]/gi).join("").slice(1);
   const year = req.query.year;
   const timestamp = req.query.timestamp;
-  const day = req.query.day;
+  let day = req.query.day;
   const yearRe = /^[12][0-9]{3}/i;
   const timestampRe = /[0-9]{10}/i;
   const yearLength = 4;
@@ -90,7 +90,10 @@ router.get("/", function(req, res, next) {
       });
     }
   } else {
-    res.send("add a query to url ?year=2015");
+    res.json({
+      unix: null,
+      natural: null
+    });
   }
 });
 
